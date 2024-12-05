@@ -10,8 +10,8 @@ phases:
       - npm install -g typescript -y
       - sudo apt install npm -y
       - npm install -g aws-cdk -y
+      - npm install -g ts-node
       - cdk version
-      - cdk synth
       - cdk deploy
     finally:
       - echo This always runs even if the install command fails
