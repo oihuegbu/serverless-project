@@ -11,6 +11,9 @@ phases:
       - npm install -g aws-cdk -y
       - cdk version
       - ls -al
+      - cdk bootstrap
+      - cdk synth
+      - cdk deploy
     finally:
       - echo This always runs even if the install command fails
 
