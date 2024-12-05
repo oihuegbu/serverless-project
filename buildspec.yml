@@ -11,6 +11,7 @@ phases:
       - sudo apt install npm -y
       - npm install -g aws-cdk -y
       - cdk version
+      - cd serverless-project/bin
       - cdk synth
       - cdk deploy
     finally:
