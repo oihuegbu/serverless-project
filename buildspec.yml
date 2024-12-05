@@ -10,8 +10,6 @@ phases:
       - sudo apt install npm -y
       - npm install -g aws-cdk -y
       - cdk version
-      - ls -al
-      - cdk bootstrap
       - cdk synth
       - cdk deploy
     finally:
