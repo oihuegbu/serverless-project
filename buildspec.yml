@@ -7,6 +7,7 @@ phases:
       - echo Entered the build phase...
       - apt-get update -y
       - sudo apt install nodejs -y
+      - npm install -g typescript -y
       - sudo apt install npm -y
       - npm install -g aws-cdk -y
       - cdk version
