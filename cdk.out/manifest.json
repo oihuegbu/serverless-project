@@ -1,0 +1,222 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "ServerlessProjectStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ServerlessProjectStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ServerlessProjectStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "ServerlessProjectStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/67a91d35388a686764dea40587c9e741fa7a2c5fd50876912da806b14b4c4712.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ServerlessProjectStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ServerlessProjectStack.assets"
+      ],
+      "metadata": {
+        "/ServerlessProjectStack/demoS3/kachidemobucket2468/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoS3kachidemobucket24682058B87D"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapi137A7887"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapiDeploymentD3F64768024573ffef8a11a98eec9bb4d6b2159c"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapiEndpoint7F121367"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Default/demo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapidemo4F870972"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Default/demo/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapidemoGET37E90A49"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myapi/Default/demo/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyapidemoPOSTB3717657"
+          }
+        ],
+        "/ServerlessProjectStack/demoCloudfront/myDistribution/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoCloudfrontmyDistributionA2FE6506"
+          }
+        ],
+        "/ServerlessProjectStack/demoRoute53/HostedZone/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoRoute53HostedZone29513DF8"
+          }
+        ],
+        "/ServerlessProjectStack/demoRoute53/Alias/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoRoute53Alias8A2A43B4"
+          }
+        ],
+        "/ServerlessProjectStack/AWSCloudFrontPartitionHostedZoneIdMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapiC6718611"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapiDeployment236873686f51e0461ad39fe56bc329d9a8c4a6e7"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapiDeploymentStageprod1AF2C38F"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapiEndpointA6F6AF35"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Default/demo/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapidemo5BFADA05"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Default/demo/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapidemoGETADB53FD6"
+          }
+        ],
+        "/ServerlessProjectStack/demoApigateway/myapi/Default/demo/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoApigatewaymyapidemoPOST9E20F038"
+          }
+        ],
+        "/ServerlessProjectStack/demoLambda/demoFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoLambdademoFunctionServiceRole3A5FA499"
+          }
+        ],
+        "/ServerlessProjectStack/demoLambda/demoFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoLambdademoFunctionFA054586"
+          }
+        ],
+        "/ServerlessProjectStack/demoDynamodb/Table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoDynamodbTableB11A67C9"
+          }
+        ],
+        "/ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoDynamodbdemoFunctionServiceRole817C0118"
+          }
+        ],
+        "/ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoDynamodbdemoFunctionServiceRoleDefaultPolicyE1ADEB85"
+          }
+        ],
+        "/ServerlessProjectStack/demoDynamodb/demoFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "demoDynamodbdemoFunctionA25E8129"
+          }
+        ],
+        "/ServerlessProjectStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ServerlessProjectStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/ServerlessProjectStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ServerlessProjectStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ServerlessProjectStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

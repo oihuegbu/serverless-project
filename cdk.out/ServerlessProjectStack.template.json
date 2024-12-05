@@ -1,0 +1,927 @@
+{
+ "Resources": {
+  "demoS3kachidemobucket24682058B87D": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "kachidemobucket2468"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoS3/kachidemobucket2468/Resource"
+   }
+  },
+  "demoCloudfrontmyapi137A7887": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "This is a kachi demo service",
+    "Name": "kachi Demo Api"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/Resource"
+   }
+  },
+  "demoCloudfrontmyapiDeploymentD3F64768024573ffef8a11a98eec9bb4d6b2159c": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "This is a kachi demo service",
+    "RestApiId": {
+     "Ref": "demoCloudfrontmyapi137A7887"
+    }
+   },
+   "DependsOn": [
+    "demoCloudfrontmyapidemoGET37E90A49",
+    "demoCloudfrontmyapidemoPOSTB3717657",
+    "demoCloudfrontmyapidemo4F870972"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/Deployment/Resource"
+   }
+  },
+  "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "demoCloudfrontmyapiDeploymentD3F64768024573ffef8a11a98eec9bb4d6b2159c"
+    },
+    "RestApiId": {
+     "Ref": "demoCloudfrontmyapi137A7887"
+    },
+    "StageName": "prod"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/DeploymentStage.prod/Resource"
+   }
+  },
+  "demoCloudfrontmyapidemo4F870972": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "demoCloudfrontmyapi137A7887",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "demo",
+    "RestApiId": {
+     "Ref": "demoCloudfrontmyapi137A7887"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/Resource"
+   }
+  },
+  "demoCloudfrontmyapidemoGET37E90A49": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": {
+     "Ref": "demoCloudfrontmyapidemo4F870972"
+    },
+    "RestApiId": {
+     "Ref": "demoCloudfrontmyapi137A7887"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/GET/Resource"
+   }
+  },
+  "demoCloudfrontmyapidemoPOSTB3717657": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": {
+     "Ref": "demoCloudfrontmyapidemo4F870972"
+    },
+    "RestApiId": {
+     "Ref": "demoCloudfrontmyapi137A7887"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/POST/Resource"
+   }
+  },
+  "demoCloudfrontmyDistributionA2FE6506": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "ServerlessProjectStackdemoCloudfrontmyDistributionOrigin1AB737014",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Join": [
+             "",
+             [
+              "https://",
+              {
+               "Ref": "demoCloudfrontmyapi137A7887"
+              },
+              ".execute-api.",
+              {
+               "Ref": "AWS::Region"
+              },
+              ".",
+              {
+               "Ref": "AWS::URLSuffix"
+              },
+              "/",
+              {
+               "Ref": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+              },
+              "/"
+             ]
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "Id": "ServerlessProjectStackdemoCloudfrontmyDistributionOrigin1AB737014",
+       "OriginPath": {
+        "Fn::Join": [
+         "",
+         [
+          "/",
+          {
+           "Fn::Select": [
+            3,
+            {
+             "Fn::Split": [
+              "/",
+              {
+               "Fn::Join": [
+                "",
+                [
+                 "https://",
+                 {
+                  "Ref": "demoCloudfrontmyapi137A7887"
+                 },
+                 ".execute-api.",
+                 {
+                  "Ref": "AWS::Region"
+                 },
+                 ".",
+                 {
+                  "Ref": "AWS::URLSuffix"
+                 },
+                 "/",
+                 {
+                  "Ref": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+                 },
+                 "/"
+                ]
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        ]
+       }
+      }
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoCloudfront/myDistribution/Resource"
+   }
+  },
+  "demoRoute53HostedZone29513DF8": {
+   "Type": "AWS::Route53::HostedZone",
+   "Properties": {
+    "Name": "demo.com."
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoRoute53/HostedZone/Resource"
+   }
+  },
+  "demoRoute53Alias8A2A43B4": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "demoCloudfrontmyDistributionA2FE6506",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": {
+     "Ref": "demoRoute53HostedZone29513DF8"
+    },
+    "Name": "demo.com.",
+    "Type": "A"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoRoute53/Alias/Resource"
+   }
+  },
+  "demoApigatewaymyapiC6718611": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "This service serves demo service",
+    "Name": "Kachi Service"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/Resource"
+   }
+  },
+  "demoApigatewaymyapiDeployment236873686f51e0461ad39fe56bc329d9a8c4a6e7": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "This service serves demo service",
+    "RestApiId": {
+     "Ref": "demoApigatewaymyapiC6718611"
+    }
+   },
+   "DependsOn": [
+    "demoApigatewaymyapidemoGETADB53FD6",
+    "demoApigatewaymyapidemoPOST9E20F038",
+    "demoApigatewaymyapidemo5BFADA05"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/Deployment/Resource"
+   }
+  },
+  "demoApigatewaymyapiDeploymentStageprod1AF2C38F": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "demoApigatewaymyapiDeployment236873686f51e0461ad39fe56bc329d9a8c4a6e7"
+    },
+    "RestApiId": {
+     "Ref": "demoApigatewaymyapiC6718611"
+    },
+    "StageName": "prod"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/DeploymentStage.prod/Resource"
+   }
+  },
+  "demoApigatewaymyapidemo5BFADA05": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "demoApigatewaymyapiC6718611",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "demo",
+    "RestApiId": {
+     "Ref": "demoApigatewaymyapiC6718611"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/Resource"
+   }
+  },
+  "demoApigatewaymyapidemoGETADB53FD6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": {
+     "Ref": "demoApigatewaymyapidemo5BFADA05"
+    },
+    "RestApiId": {
+     "Ref": "demoApigatewaymyapiC6718611"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/GET/Resource"
+   }
+  },
+  "demoApigatewaymyapidemoPOST9E20F038": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "Type": "MOCK"
+    },
+    "ResourceId": {
+     "Ref": "demoApigatewaymyapidemo5BFADA05"
+    },
+    "RestApiId": {
+     "Ref": "demoApigatewaymyapiC6718611"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/POST/Resource"
+   }
+  },
+  "demoLambdademoFunctionServiceRole3A5FA499": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoLambda/demoFunction/ServiceRole/Resource"
+   }
+  },
+  "demoLambdademoFunctionFA054586": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip"
+    },
+    "Handler": "lambda-handler.Handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "demoLambdademoFunctionServiceRole3A5FA499",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.10"
+   },
+   "DependsOn": [
+    "demoLambdademoFunctionServiceRole3A5FA499"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoLambda/demoFunction/Resource",
+    "aws:asset:path": "asset.472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "demoDynamodbTableB11A67C9": {
+   "Type": "AWS::DynamoDB::GlobalTable",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "pk",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "pk",
+      "KeyType": "HASH"
+     }
+    ],
+    "Replicas": [
+     {
+      "Region": {
+       "Ref": "AWS::Region"
+      }
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoDynamodb/Table/Resource"
+   }
+  },
+  "demoDynamodbdemoFunctionServiceRole817C0118": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/Resource"
+   }
+  },
+  "demoDynamodbdemoFunctionServiceRoleDefaultPolicyE1ADEB85": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "demoDynamodbTableB11A67C9",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "demoDynamodbdemoFunctionServiceRoleDefaultPolicyE1ADEB85",
+    "Roles": [
+     {
+      "Ref": "demoDynamodbdemoFunctionServiceRole817C0118"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "demoDynamodbdemoFunctionA25E8129": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip"
+    },
+    "Handler": "lambda-handler.Handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "demoDynamodbdemoFunctionServiceRole817C0118",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.10"
+   },
+   "DependsOn": [
+    "demoDynamodbdemoFunctionServiceRoleDefaultPolicyE1ADEB85",
+    "demoDynamodbdemoFunctionServiceRole817C0118"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/demoDynamodb/demoFunction/Resource",
+    "aws:asset:path": "asset.472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/01RwU4CMRD9Fu+lCkQSjyBRL0QCxoMXMtsOWOh2NtupZLPpv9tuQTnNey/TeTOvEzmezeTDHZz9SOnTyJpK9lsGdRJJ2vV+KvtFUCdk8bx3F1TKAjxGAY05AOMZOtlv0PO8MbnzCpfYWOpqdMP7G5Y8Dpi1AlI/hVZhHvpHLoMKXiF/k85SQVEoS0HvW3Is+6Xx3JoqsCE3ON3wKFoKjI/plHWorFFv5Bn1F7nB4YbNN6io1cU3oy1yFBbqSoPsX4JT1/lXHIWBOl1Otmyb65qSR5dpQVH46Q68R/ZynovQnYOadIr6AyqLn5Pc/GqpAjsIMWbhPXAThtxW0DTGHf6DGcbk5LJ6m1LCz+S0Kbs50iiP/v5n/CTzLx+9MaM2ODY1yk2pvydxZ8sCAgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ServerlessProjectStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "demoCloudfrontmyapiEndpoint7F121367": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "demoCloudfrontmyapi137A7887"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "demoApigatewaymyapiEndpointA6F6AF35": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "demoApigatewaymyapiC6718611"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "demoApigatewaymyapiDeploymentStageprod1AF2C38F"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Mappings": {
+  "AWSCloudFrontPartitionHostedZoneIdMap": {
+   "aws": {
+    "zoneId": "Z2FDTNDATAQYW2"
+   },
+   "aws-cn": {
+    "zoneId": "Z3RFFRIM2A3IF5"
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

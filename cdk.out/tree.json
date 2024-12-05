@@ -1,0 +1,1106 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "ServerlessProjectStack": {
+        "id": "ServerlessProjectStack",
+        "path": "ServerlessProjectStack",
+        "children": {
+          "demoS3": {
+            "id": "demoS3",
+            "path": "ServerlessProjectStack/demoS3",
+            "children": {
+              "kachidemobucket2468": {
+                "id": "kachidemobucket2468",
+                "path": "ServerlessProjectStack/demoS3/kachidemobucket2468",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoS3/kachidemobucket2468/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                      "aws:cdk:cloudformation:props": {
+                        "bucketName": "kachidemobucket2468"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "demoCloudfront": {
+            "id": "demoCloudfront",
+            "path": "ServerlessProjectStack/demoCloudfront",
+            "children": {
+              "myapi": {
+                "id": "myapi",
+                "path": "ServerlessProjectStack/demoCloudfront/myapi",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoCloudfront/myapi/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "This is a kachi demo service",
+                        "name": "kachi Demo Api"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Deployment": {
+                    "id": "Deployment",
+                    "path": "ServerlessProjectStack/demoCloudfront/myapi/Deployment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoCloudfront/myapi/Deployment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                          "aws:cdk:cloudformation:props": {
+                            "description": "This is a kachi demo service",
+                            "restApiId": {
+                              "Ref": "demoCloudfrontmyapi137A7887"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "DeploymentStage.prod": {
+                    "id": "DeploymentStage.prod",
+                    "path": "ServerlessProjectStack/demoCloudfront/myapi/DeploymentStage.prod",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoCloudfront/myapi/DeploymentStage.prod/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "deploymentId": {
+                              "Ref": "demoCloudfrontmyapiDeploymentD3F64768024573ffef8a11a98eec9bb4d6b2159c"
+                            },
+                            "restApiId": {
+                              "Ref": "demoCloudfrontmyapi137A7887"
+                            },
+                            "stageName": "prod"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Endpoint": {
+                    "id": "Endpoint",
+                    "path": "ServerlessProjectStack/demoCloudfront/myapi/Endpoint",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "ServerlessProjectStack/demoCloudfront/myapi/Default",
+                    "children": {
+                      "demo": {
+                        "id": "demo",
+                        "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "demoCloudfrontmyapi137A7887",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "demo",
+                                "restApiId": {
+                                  "Ref": "demoCloudfrontmyapi137A7887"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.166.0"
+                            }
+                          },
+                          "GET": {
+                            "id": "GET",
+                            "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/GET",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/GET/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "authorizationType": "NONE",
+                                    "httpMethod": "GET",
+                                    "integration": {
+                                      "type": "MOCK"
+                                    },
+                                    "resourceId": {
+                                      "Ref": "demoCloudfrontmyapidemo4F870972"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "demoCloudfrontmyapi137A7887"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.166.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.166.0"
+                            }
+                          },
+                          "POST": {
+                            "id": "POST",
+                            "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/POST",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "ServerlessProjectStack/demoCloudfront/myapi/Default/demo/POST/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "authorizationType": "NONE",
+                                    "httpMethod": "POST",
+                                    "integration": {
+                                      "type": "MOCK"
+                                    },
+                                    "resourceId": {
+                                      "Ref": "demoCloudfrontmyapidemo4F870972"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "demoCloudfrontmyapi137A7887"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.166.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.166.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+                  "version": "2.166.0"
+                }
+              },
+              "myDistribution": {
+                "id": "myDistribution",
+                "path": "ServerlessProjectStack/demoCloudfront/myDistribution",
+                "children": {
+                  "Origin1": {
+                    "id": "Origin1",
+                    "path": "ServerlessProjectStack/demoCloudfront/myDistribution/Origin1",
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.4.2"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoCloudfront/myDistribution/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                      "aws:cdk:cloudformation:props": {
+                        "distributionConfig": {
+                          "enabled": true,
+                          "origins": [
+                            {
+                              "domainName": {
+                                "Fn::Select": [
+                                  2,
+                                  {
+                                    "Fn::Split": [
+                                      "/",
+                                      {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "https://",
+                                            {
+                                              "Ref": "demoCloudfrontmyapi137A7887"
+                                            },
+                                            ".execute-api.",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ".",
+                                            {
+                                              "Ref": "AWS::URLSuffix"
+                                            },
+                                            "/",
+                                            {
+                                              "Ref": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+                                            },
+                                            "/"
+                                          ]
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "id": "ServerlessProjectStackdemoCloudfrontmyDistributionOrigin1AB737014",
+                              "originPath": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "/",
+                                    {
+                                      "Fn::Select": [
+                                        3,
+                                        {
+                                          "Fn::Split": [
+                                            "/",
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "https://",
+                                                  {
+                                                    "Ref": "demoCloudfrontmyapi137A7887"
+                                                  },
+                                                  ".execute-api.",
+                                                  {
+                                                    "Ref": "AWS::Region"
+                                                  },
+                                                  ".",
+                                                  {
+                                                    "Ref": "AWS::URLSuffix"
+                                                  },
+                                                  "/",
+                                                  {
+                                                    "Ref": "demoCloudfrontmyapiDeploymentStageprod6B2D7E1C"
+                                                  },
+                                                  "/"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                ]
+                              },
+                              "customOriginConfig": {
+                                "originSslProtocols": [
+                                  "TLSv1.2"
+                                ],
+                                "originProtocolPolicy": "https-only"
+                              }
+                            }
+                          ],
+                          "defaultCacheBehavior": {
+                            "pathPattern": "*",
+                            "targetOriginId": "ServerlessProjectStackdemoCloudfrontmyDistributionOrigin1AB737014",
+                            "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                            "compress": true,
+                            "viewerProtocolPolicy": "allow-all"
+                          },
+                          "httpVersion": "http2",
+                          "ipv6Enabled": true
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "demoRoute53": {
+            "id": "demoRoute53",
+            "path": "ServerlessProjectStack/demoRoute53",
+            "children": {
+              "HostedZone": {
+                "id": "HostedZone",
+                "path": "ServerlessProjectStack/demoRoute53/HostedZone",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoRoute53/HostedZone/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Route53::HostedZone",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "demo.com."
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_route53.CfnHostedZone",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_route53.PublicHostedZone",
+                  "version": "2.166.0"
+                }
+              },
+              "Alias": {
+                "id": "Alias",
+                "path": "ServerlessProjectStack/demoRoute53/Alias",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoRoute53/Alias/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Route53::RecordSet",
+                      "aws:cdk:cloudformation:props": {
+                        "aliasTarget": {
+                          "hostedZoneId": {
+                            "Fn::FindInMap": [
+                              "AWSCloudFrontPartitionHostedZoneIdMap",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "zoneId"
+                            ]
+                          },
+                          "dnsName": {
+                            "Fn::GetAtt": [
+                              "demoCloudfrontmyDistributionA2FE6506",
+                              "DomainName"
+                            ]
+                          }
+                        },
+                        "hostedZoneId": {
+                          "Ref": "demoRoute53HostedZone29513DF8"
+                        },
+                        "name": "demo.com.",
+                        "type": "A"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_route53.CfnRecordSet",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_route53.ARecord",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "AWSCloudFrontPartitionHostedZoneIdMap": {
+            "id": "AWSCloudFrontPartitionHostedZoneIdMap",
+            "path": "ServerlessProjectStack/AWSCloudFrontPartitionHostedZoneIdMap",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnMapping",
+              "version": "2.166.0"
+            }
+          },
+          "demoApigateway": {
+            "id": "demoApigateway",
+            "path": "ServerlessProjectStack/demoApigateway",
+            "children": {
+              "myapi": {
+                "id": "myapi",
+                "path": "ServerlessProjectStack/demoApigateway/myapi",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoApigateway/myapi/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGateway::RestApi",
+                      "aws:cdk:cloudformation:props": {
+                        "description": "This service serves demo service",
+                        "name": "Kachi Service"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.CfnRestApi",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Deployment": {
+                    "id": "Deployment",
+                    "path": "ServerlessProjectStack/demoApigateway/myapi/Deployment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoApigateway/myapi/Deployment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Deployment",
+                          "aws:cdk:cloudformation:props": {
+                            "description": "This service serves demo service",
+                            "restApiId": {
+                              "Ref": "demoApigatewaymyapiC6718611"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnDeployment",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Deployment",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "DeploymentStage.prod": {
+                    "id": "DeploymentStage.prod",
+                    "path": "ServerlessProjectStack/demoApigateway/myapi/DeploymentStage.prod",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoApigateway/myapi/DeploymentStage.prod/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGateway::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "deploymentId": {
+                              "Ref": "demoApigatewaymyapiDeployment236873686f51e0461ad39fe56bc329d9a8c4a6e7"
+                            },
+                            "restApiId": {
+                              "Ref": "demoApigatewaymyapiC6718611"
+                            },
+                            "stageName": "prod"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.CfnStage",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.Stage",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Endpoint": {
+                    "id": "Endpoint",
+                    "path": "ServerlessProjectStack/demoApigateway/myapi/Endpoint",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Default": {
+                    "id": "Default",
+                    "path": "ServerlessProjectStack/demoApigateway/myapi/Default",
+                    "children": {
+                      "demo": {
+                        "id": "demo",
+                        "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::ApiGateway::Resource",
+                              "aws:cdk:cloudformation:props": {
+                                "parentId": {
+                                  "Fn::GetAtt": [
+                                    "demoApigatewaymyapiC6718611",
+                                    "RootResourceId"
+                                  ]
+                                },
+                                "pathPart": "demo",
+                                "restApiId": {
+                                  "Ref": "demoApigatewaymyapiC6718611"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.CfnResource",
+                              "version": "2.166.0"
+                            }
+                          },
+                          "GET": {
+                            "id": "GET",
+                            "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/GET",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/GET/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "authorizationType": "NONE",
+                                    "httpMethod": "GET",
+                                    "integration": {
+                                      "type": "MOCK"
+                                    },
+                                    "resourceId": {
+                                      "Ref": "demoApigatewaymyapidemo5BFADA05"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "demoApigatewaymyapiC6718611"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.166.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.166.0"
+                            }
+                          },
+                          "POST": {
+                            "id": "POST",
+                            "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/POST",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "ServerlessProjectStack/demoApigateway/myapi/Default/demo/POST/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::ApiGateway::Method",
+                                  "aws:cdk:cloudformation:props": {
+                                    "authorizationType": "NONE",
+                                    "httpMethod": "POST",
+                                    "integration": {
+                                      "type": "MOCK"
+                                    },
+                                    "resourceId": {
+                                      "Ref": "demoApigatewaymyapidemo5BFADA05"
+                                    },
+                                    "restApiId": {
+                                      "Ref": "demoApigatewaymyapiC6718611"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_apigateway.CfnMethod",
+                                  "version": "2.166.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_apigateway.Method",
+                              "version": "2.166.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigateway.Resource",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigateway.ResourceBase",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_apigateway.RestApi",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "demoLambda": {
+            "id": "demoLambda",
+            "path": "ServerlessProjectStack/demoLambda",
+            "children": {
+              "demoFunction": {
+                "id": "demoFunction",
+                "path": "ServerlessProjectStack/demoLambda/demoFunction",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "ServerlessProjectStack/demoLambda/demoFunction/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "ServerlessProjectStack/demoLambda/demoFunction/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.166.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoLambda/demoFunction/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "ServerlessProjectStack/demoLambda/demoFunction/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "ServerlessProjectStack/demoLambda/demoFunction/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.166.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "ServerlessProjectStack/demoLambda/demoFunction/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoLambda/demoFunction/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip"
+                        },
+                        "handler": "lambda-handler.Handler",
+                        "role": {
+                          "Fn::GetAtt": [
+                            "demoLambdademoFunctionServiceRole3A5FA499",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "python3.10"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "demoDynamodb": {
+            "id": "demoDynamodb",
+            "path": "ServerlessProjectStack/demoDynamodb",
+            "children": {
+              "Table": {
+                "id": "Table",
+                "path": "ServerlessProjectStack/demoDynamodb/Table",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoDynamodb/Table/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::GlobalTable",
+                      "aws:cdk:cloudformation:props": {
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "pk",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "billingMode": "PAY_PER_REQUEST",
+                        "keySchema": [
+                          {
+                            "attributeName": "pk",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "replicas": [
+                          {
+                            "region": {
+                              "Ref": "AWS::Region"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnGlobalTable",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.TableV2",
+                  "version": "2.166.0"
+                }
+              },
+              "demoFunction": {
+                "id": "demoFunction",
+                "path": "ServerlessProjectStack/demoDynamodb/demoFunction",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.166.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.166.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "ServerlessProjectStack/demoDynamodb/demoFunction/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "dynamodb:BatchGetItem",
+                                        "dynamodb:BatchWriteItem",
+                                        "dynamodb:ConditionCheckItem",
+                                        "dynamodb:DeleteItem",
+                                        "dynamodb:DescribeTable",
+                                        "dynamodb:GetItem",
+                                        "dynamodb:GetRecords",
+                                        "dynamodb:GetShardIterator",
+                                        "dynamodb:PutItem",
+                                        "dynamodb:Query",
+                                        "dynamodb:Scan",
+                                        "dynamodb:UpdateItem"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "demoDynamodbTableB11A67C9",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "demoDynamodbdemoFunctionServiceRoleDefaultPolicyE1ADEB85",
+                                "roles": [
+                                  {
+                                    "Ref": "demoDynamodbdemoFunctionServiceRole817C0118"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.166.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "ServerlessProjectStack/demoDynamodb/demoFunction/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "ServerlessProjectStack/demoDynamodb/demoFunction/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.166.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "ServerlessProjectStack/demoDynamodb/demoFunction/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.166.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.166.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ServerlessProjectStack/demoDynamodb/demoFunction/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "472ae26ac651f2319af6c102fd8e865203d84706c7552b3374f2c2fc953aa2bb.zip"
+                        },
+                        "handler": "lambda-handler.Handler",
+                        "role": {
+                          "Fn::GetAtt": [
+                            "demoDynamodbdemoFunctionServiceRole817C0118",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "python3.10"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.166.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "ServerlessProjectStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "ServerlessProjectStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.166.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "ServerlessProjectStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.166.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "ServerlessProjectStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.166.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "ServerlessProjectStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.166.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.166.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.2"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.166.0"
+    }
+  }
+}

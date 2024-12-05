@@ -1,0 +1,19 @@
+version: 0.2
+
+
+phases:
+  build:
+    commands:
+      - echo Entered the build phase...
+      - apt-get update -y
+      - sudo apt install nodejs -y
+      - sudo apt install npm -y
+      - npm install -g aws-cdk -y
+      - cdk version
+      - ls -al
+    finally:
+      - echo This always runs even if the install command fails
+
+artifacts:
+  files:
+    - "**/*"
