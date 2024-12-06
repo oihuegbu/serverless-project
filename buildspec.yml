@@ -9,8 +9,7 @@ phases:
       - sudo apt install nodejs -y
       - npm install -g typescript -y
       - sudo apt install npm -y
-      - npm install -g aws-cdk -y
-      - npm install -g ts-node
+      - npm install
       - cdk version
       - cdk deploy
     finally:
