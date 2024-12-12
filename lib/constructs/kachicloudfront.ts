@@ -20,7 +20,7 @@ export class CustomCloudfront extends Construct {
     constructor(scope: Construct, id: string, props: cloudfrontProps) {
       super(scope, id);
 
-      //Define API gateway and connect to lambda Handler
+      Define API gateway and connect to lambda Handler
       const apiGateway = new apigateway.RestApi(this, 'myapi', {
         restApiName: props.restApiName,
         description: props.description
@@ -40,8 +40,6 @@ export class CustomCloudfront extends Construct {
       integration.addMethod('POST');
 
       this.Distribution = cloudfrontDistribution;
-
-
     }
       
 

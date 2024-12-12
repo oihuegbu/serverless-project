@@ -39,8 +39,6 @@ export class CustomApigateway extends Construct {
       //   //environment: { ['bucketName']: newBucket. }
       // });
 
-      
-
 
     }
      

@@ -1,5 +1,8 @@
 version: 0.2
 
+env:
+
+
 
 phases:
   build:
@@ -12,7 +15,7 @@ phases:
       - npm install
       - npm install -g aws-cdk
       - cdk version
-      - cdk deploy --require-approval never
+      - if [ "$deploy" == "0" ]; then cdk synth --require-approval never; elseif [ "$deploy" == "1" ]; then cdk deploy --require-approval never; fi
     finally:
       - echo This always runs even if the install command fails
 
