@@ -10,6 +10,9 @@ phases:
       - sudo apt install npm -y
       - npm install
       - npm install -g aws-cdk
+      - touch .env
+      - echo $cdkenv > .env
+      - cat .env
       - cdk version
       - if [ "$deploy" = "0" ]; then cdk synth --require-approval never; else cdk deploy --require-approval never; fi
     finally:
